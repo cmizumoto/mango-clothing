@@ -1,6 +1,12 @@
 import { initializeApp } from "firebase/app";
 
-import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithRedirect,
+  signInWithPopup,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 // Your web app's Firebase configuration - this is provided by firebase
@@ -17,8 +23,8 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 /* Provider is the type of login you chose in the firebase authentication, could be github, twitter and other providers */
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
@@ -26,14 +32,17 @@ provider.setCustomParameters({
 export const auth = getAuth();
 
 // this popUp that login method utilized by google, small popup to choose your google account
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
+
+export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 // getFirestore() retreives the contents from de firestore database
 export const db = getFirestore();
 
 // Using this function to retreive data from authentication service
 // And passing to the firestore
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalInformation) => {
+  if (!userAuth) return;
   // Doc method asks for 3 parameters, database, collection, identifier/unique id
   // Here we are asking for the document in this database under the users collection with this unique ID
   const userDocRef = doc(db, "users", userAuth.uid);
@@ -50,11 +59,20 @@ export const createUserDocumentFromAuth = async (userAuth) => {
 
     try {
       // here we try to set this document in our database
-      await setDoc(userDocRef, { displayName, email, createdAt });
+      await setDoc(userDocRef, { displayName, email, createdAt, ...additionalInformation });
     } catch (error) {
       console.log("error creating the user", error.message);
     }
   }
 
   return userDocRef;
+};
+
+/* 
+  Create user with Email and Password
+*/
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
 };
