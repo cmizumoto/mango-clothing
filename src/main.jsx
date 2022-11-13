@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import { UserProvider } from "./components/contexts/user.context";
+import { ProductsProvider } from "./components/contexts/products.context";
+import { CartDropdownProvider } from "./components/contexts/cart-dropdown.context";
 
 import "./index.scss";
 
@@ -11,7 +13,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <App />
+        <ProductsProvider>
+          <CartDropdownProvider>
+            <App />
+          </CartDropdownProvider>
+        </ProductsProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
