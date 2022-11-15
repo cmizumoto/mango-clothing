@@ -3,9 +3,9 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
-import { UserProvider } from "./components/contexts/user.context";
-import { ProductsProvider } from "./components/contexts/products.context";
-import { CartDropdownProvider } from "./components/contexts/cart-dropdown.context";
+import { UserProvider } from "./contexts/user.context";
+import { ProductsProvider } from "./contexts/products.context";
+import { CartDropdownProvider } from "./contexts/cart-dropdown.context";
 
 import "./index.scss";
 
