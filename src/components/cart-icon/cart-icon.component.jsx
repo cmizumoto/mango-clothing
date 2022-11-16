@@ -1,15 +1,15 @@
 import { useContext } from "react";
 
 import { UserContext } from "../../contexts/user.context";
-import { CartDropdownContext } from "../../contexts/cart-dropdown.context";
+import { CartContext } from "../../contexts/cart.context";
 
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
 
 import "./cart-icon.styles.scss";
 
 const CartIcon = () => {
-  const { isCartOpen, setIsCartOpen } = useContext(CartDropdownContext);
-  const { itemQuantity } = useContext(CartDropdownContext);
+  const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+  const { itemQuantity } = useContext(CartContext);
 
   const toggleIsCartOpen = () => setIsCartOpen(!isCartOpen);
 

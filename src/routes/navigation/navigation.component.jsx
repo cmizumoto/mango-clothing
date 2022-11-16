@@ -4,7 +4,7 @@ import { signOutUser } from "../../utils/firebase/firebase.utils";
 import { ReactComponent as MangoLogo } from "../../assets/mango-logo.svg";
 
 import { UserContext } from "../../contexts/user.context";
-import { CartDropdownContext } from "../../contexts/cart-dropdown.context";
+import { CartContext } from "../../contexts/cart.context";
 
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
@@ -13,7 +13,7 @@ import "./navigation.styles.scss";
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-  const { isCartOpen } = useContext(CartDropdownContext);
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <Fragment>
