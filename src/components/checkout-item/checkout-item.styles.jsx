@@ -33,6 +33,7 @@ export const CheckoutDataContainers = styled.div`
 `;
 
 export const CheckoutQuantityContainer = styled.div`
+  width: 23%;
   display: flex;
   align-items: center;
 `;

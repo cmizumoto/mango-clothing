@@ -5,6 +5,7 @@ import {
   CheckoutItemContainer,
   CheckoutImageContainer,
   CheckoutQuantityContainer,
+  CheckoutDataContainers,
   CheckoutQuantityArrows,
   CheckoutRemoveButton,
 } from "./checkout-item.styles";
@@ -23,23 +24,22 @@ const CheckoutItem = ({ cartItem }) => {
       <CheckoutImageContainer>
         <img src={imageUrl} alt={`${name}`} />
       </CheckoutImageContainer>
-      <span>
+      <CheckoutDataContainers>
         <p>{name}</p>
-      </span>
-      <span>
-        <CheckoutQuantityContainer>
-          <CheckoutQuantityArrows onClick={decreaseItemQuantityHandler}>
-            &#10094;
-          </CheckoutQuantityArrows>
-          <span>{quantity}</span>
-          <CheckoutQuantityArrows onClick={increaseItemQuantityHandler}>
-            &#10095;
-          </CheckoutQuantityArrows>
-        </CheckoutQuantityContainer>
-      </span>
-      <span>
+      </CheckoutDataContainers>
+      <CheckoutQuantityContainer>
+        <CheckoutQuantityArrows onClick={decreaseItemQuantityHandler}>
+          &#10094;
+        </CheckoutQuantityArrows>
+        <span>{quantity}</span>
+        <CheckoutQuantityArrows onClick={increaseItemQuantityHandler}>
+          &#10095;
+        </CheckoutQuantityArrows>
+      </CheckoutQuantityContainer>
+
+      <CheckoutDataContainers>
         <p>{price}</p>
-      </span>
+      </CheckoutDataContainers>
       <CheckoutRemoveButton onClick={removeItemCheckoutHandler}>&#10005;</CheckoutRemoveButton>
     </CheckoutItemContainer>
   );

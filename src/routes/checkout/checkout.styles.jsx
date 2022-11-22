@@ -17,13 +17,13 @@ export const CheckoutHeader = styled.div`
   border-bottom: 1px solid darkgrey;
 
   &:last-child {
+    text-align: right;
     width: 8%;
   }
 `;
 
 export const HeaderBlock = styled.div`
   text-transform: capitalize;
-  width: 23%;
 `;
 
 export const CheckoutItems = styled.div`
