@@ -8,7 +8,8 @@ import {
   ProductCardImage,
   ProductCardButton,
   ProductCardFooter,
-  ProductFooterPrice,
+  ProductName,
+  ProductPrice,
 } from "./product-card.styles";
 
 const ProductCard = ({ product }) => {
@@ -21,8 +22,8 @@ const ProductCard = ({ product }) => {
     <ProductCardContainer>
       <ProductCardImage src={imageUrl} alt={`${name}`} />
       <ProductCardFooter>
-        <span>{name}</span>
-        <ProductFooterPrice>{price}</ProductFooterPrice>
+        <ProductName>{name}</ProductName>
+        <ProductPrice>{price}</ProductPrice>
       </ProductCardFooter>
       <ProductCardButton buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={addProductToCart}>
         Add to cart

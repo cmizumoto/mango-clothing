@@ -40,13 +40,13 @@ export const ProductCardFooter = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 18px;
-
-  span {
-    width: 90%;
-    margin-bottom: 15px;
-  }
 `;
 
-export const ProductFooterPrice = styled.span`
+export const ProductName = styled.span`
+  width: 90%;
+  margin-bottom: 15px;
+`;
+
+export const ProductPrice = styled.span`
   width: 10%;
 `;

@@ -5,7 +5,7 @@ import { CategoriesContext } from "../../contexts/categories.context";
 
 import ProductCard from "../../components/product-card/product-card.component";
 
-import { CategoryContainer } from "./category.styles";
+import { CategoryTitle, CategoryContainer } from "./category.styles";
 
 const Category = () => {
   const { category } = useParams();
@@ -18,8 +18,8 @@ const Category = () => {
 
   return (
     <Fragment>
-      <h2>{category}</h2>
-      <CategoryContainer className="category-container">
+      <CategoryTitle>{category}</CategoryTitle>
+      <CategoryContainer>
         {/* Since we are trying to get the products Async, the code breaks and says we cannot loop
       through and empty array. To avoid this, we use a safe guard that only render the products and
     map it, if it is not undefined. */}
