@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 
+// Auth related
 import {
   getAuth,
   signInWithRedirect,
@@ -10,7 +11,18 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+
+// Firestore
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from "firebase/firestore";
 
 // Your web app's Firebase configuration - this is provided by firebase
 const firebaseConfig = {
@@ -41,6 +53,46 @@ export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googlePro
 
 // getFirestore() retreives the contents from de firestore database
 export const db = getFirestore();
+
+// Using this function to grab the Shop Data JS and populate the firestore database
+// Note that we are using these methods because we didn't had a previous database, we are just populating one to continue the examples, but this could be used to store more data.
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  // The collection key is the collection name, using almost the same structure as the Auth methods.
+  const collectionRef = collection(db, collectionKey);
+  // writeBatch uses a transaction like exchange, both of the writes must be valid in order to be completed
+  const batch = writeBatch(db);
+
+  // loop each object and save using the doc method like the auth one
+  objectsToAdd.forEach((object) => {
+    // Pulling the title from the object
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    // Setting the title and the object in the database
+    batch.set(docRef, object);
+  });
+
+  // commit the batch and wait till everything is done
+  await batch.commit();
+  console.log("done");
+};
+
+// Now we can get back the data stored
+export const getCategoriesAndDocuments = async () => {
+  // same as above, we are selecting the collection we want to fetch
+  const collectionRef = collection(db, "categories");
+  // get a query that returns the collectionRef above
+  const q = query(collectionRef);
+
+  // finally we try to get the snapshot (data in a structure) from firebase
+  const querySnapshot = await getDocs(q);
+  // Here we are mapping and creating the categories arrays with the titles and item objects to be received in our website
+  const categoryMap = querySnapshot.docs.reduce((accumulator, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    accumulator[title.toLowerCase()] = items;
+    return accumulator;
+  }, {});
+
+  return categoryMap;
+};
 
 // Using this function to retreive data from authentication service
 // And passing to the firestore

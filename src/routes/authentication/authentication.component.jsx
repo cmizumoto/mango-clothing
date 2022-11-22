@@ -4,7 +4,7 @@ import { getRedirectResult } from "firebase/auth";
 import SignUpForm from "../../components/sign-up-form/sign-up-form.component";
 import SignInForm from "../../components/sign-in-form/sign-in-form.component";
 
-import "./authentication.styles.scss";
+import { AuthenticationContainer } from "./authentication.styles";
 
 // import {
 //   auth,
@@ -27,13 +27,13 @@ const Authentication = () => {
     console.log({ user });
   }; */
   return (
-    <div className="authentication-container">
+    <AuthenticationContainer>
       {/* <h1>Sign in page</h1> */}
       {/* <button onClick={logGoogleUser}>Sign in with Google Popup</button> */}
       {/* <button onClick={logGoogleRedirectUser}>Sign in with Google Redirect</button> */}
       <SignInForm />
       <SignUpForm />
-    </div>
+    </AuthenticationContainer>
   );
 };
 
