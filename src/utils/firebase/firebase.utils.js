@@ -85,13 +85,7 @@ export const getCategoriesAndDocuments = async () => {
   // finally we try to get the snapshot (data in a structure) from firebase
   const querySnapshot = await getDocs(q);
   // Here we are mapping and creating the categories arrays with the titles and item objects to be received in our website
-  const categoryMap = querySnapshot.docs.reduce((accumulator, docSnapshot) => {
-    const { title, items } = docSnapshot.data();
-    accumulator[title.toLowerCase()] = items;
-    return accumulator;
-  }, {});
-
-  return categoryMap;
+  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
 
 // Using this function to retreive data from authentication service

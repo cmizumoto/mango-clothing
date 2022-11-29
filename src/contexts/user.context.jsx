@@ -1,3 +1,7 @@
+/* 
+  Redux took place of this functionality, there is no need to keep this file, but leaving it for studies purpouse.
+*/
+
 import { createContext, useEffect, useReducer } from "react";
 
 import { createAction } from "../utils/reducer/reducer.utils";

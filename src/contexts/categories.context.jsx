@@ -1,3 +1,7 @@
+/* 
+  Redux took place of this functionality, there is no need to keep this file, but leaving it for studies purpouse.
+*/
+
 import { createContext, useState, useEffect } from "react";
 
 import { getCategoriesAndDocuments } from "../utils/firebase/firebase.utils.js";
@@ -17,8 +21,9 @@ export const CategoriesProvider = ({ children }) => {
   */
   useEffect(() => {
     const getCategoriesMap = async () => {
-      const categoryMap = await getCategoriesAndDocuments();
-      setCategoriesMap(categoryMap);
+      const categoriesArray = await getCategoriesAndDocuments();
+
+      // setCategoriesMap(categoryMap);
     };
     getCategoriesMap();
   }, []);
