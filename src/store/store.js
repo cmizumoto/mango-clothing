@@ -1,48 +1,38 @@
 // We are not using redux toolkit, createStore will display as a deprecated feature
 // Once I learn more about redux, I will refactor to use RTK
 import { compose, createStore, applyMiddleware } from "redux";
-// import logger from "redux-logger";
+import logger from "redux-logger";
 
 import { rootReducer } from "./root-reducer";
 
-/* 
-    Creating this middleware logger to understand better the lifecycle of the redux;
-    Now in the category component we will see:
-    - Initial render
-    - Selector from redux is fired
+// Here we use redux-persist to store the user session (cart items) in the local storage
+// https://www.npmjs.com/package/redux-persist
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-useEffect does not trigger a re-render, because its initial value is an empty object or array
-it will evaluate undefined === undefined // true
-    - useEffect is fired calling setProducts
-    - Middleware Type is logged
-    - Middleware Payload is logged
-    - Middleware currentState is logged
-
-Here is where the next(action) is executed, triggering all the useSelectors consequently causing another re-render
-    - Selector from redux is fired again
-    - Component is re-rendered
-
-    - Middleware Next State is logged
-*/
-const loggerMiddleware = (store) => (next) => (action) => {
-  if (!action.type) {
-    return next(action);
-  }
-
-  console.log("type: ", action.type);
-  console.log("payload: ", action.payload);
-  console.log("currentState: ", store.getState());
-
-  next(action);
-  // Only after action runs, this console.log will run
-  console.log("next state: ", store.getState());
+const persistConfig = {
+  key: "root",
+  storage,
+  blacklist: ["user"],
 };
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Middleware works like any other middleware, they catch actions before hiting the reducer
 // Logger middleware will help logging the steps of the reducer
-const middleWares = [loggerMiddleware];
+// Using process.env.NODE_ENV we can avoid logging when we deploy
+// And .filter(Boolean) will return an empty array if it is true
+const middleWares = [process.env.NODE_ENV !== "production" && logger].filter(Boolean);
+
+const composeEnhancer =
+  (process.env.NODE_ENV !== "production" &&
+    window &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
 
 // Compose can receive multiple functions and it will execute left to right
-const composedEnhancers = compose(applyMiddleware(...middleWares));
+const composedEnhancers = composeEnhancer(applyMiddleware(...middleWares));
 
-export const store = createStore(rootReducer, undefined, composedEnhancers);
+export const store = createStore(persistedReducer, undefined, composedEnhancers);
+
+export const persistor = persistStore(store);
