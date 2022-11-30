@@ -2,6 +2,7 @@
 // Once I learn more about redux, I will refactor to use RTK
 import { compose, createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
+import thunk from "redux-thunk";
 
 import { rootReducer } from "./root-reducer";
 
@@ -13,7 +14,7 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["user"],
+  whitelist: ["cart"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -22,7 +23,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 // Logger middleware will help logging the steps of the reducer
 // Using process.env.NODE_ENV we can avoid logging when we deploy
 // And .filter(Boolean) will return an empty array if it is true
-const middleWares = [process.env.NODE_ENV !== "production" && logger].filter(Boolean);
+const middleWares = [process.env.NODE_ENV !== "production" && logger, thunk].filter(Boolean);
 
 const composeEnhancer =
   (process.env.NODE_ENV !== "production" &&
