@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
 import { SignUpContainer } from "./sign-up-form.styles";
+
+import { signUpStart } from "../../store/user/user.action";
 
 import {
   createAuthUserWithEmailAndPassword,
@@ -19,6 +22,7 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
   // useState using the default object created above
   const [formFields, setFormFields] = useState(defaultFormFields);
   //   Destructure the object from the form fields created in the use state
@@ -36,8 +40,7 @@ const SignUpForm = () => {
     }
 
     try {
-      const { user } = await createAuthUserWithEmailAndPassword(email, password);
-      await createUserDocumentFromAuth(user, { displayName });
+      dispatch(signUpStart(email, password, displayName));
 
       resetFormFields();
     } catch (error) {
