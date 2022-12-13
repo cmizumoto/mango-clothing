@@ -8,3 +8,5 @@ Trying things out by myself, using a Udemy course for assets also if somehow I g
 - React (hooks)
 - Vite
 - React Router
+- Firebase
+- Redux (saga, persist, reselect)

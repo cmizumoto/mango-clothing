@@ -1,15 +1,15 @@
 // We are not using redux toolkit, createStore will display as a deprecated feature
 // Once I learn more about redux, I will refactor to use RTK
 import { compose, createStore, applyMiddleware } from "redux";
-import logger from "redux-logger";
-import thunk from "redux-thunk";
-
-import { rootReducer } from "./root-reducer";
-
 // Here we use redux-persist to store the user session (cart items) in the local storage
 // https://www.npmjs.com/package/redux-persist
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import logger from "redux-logger";
+import createSagaMiddleware from "redux-saga";
+
+import { rootReducer } from "./root-reducer";
+import { rootSaga } from "./root-saga";
 
 const persistConfig = {
   key: "root",
@@ -17,13 +17,17 @@ const persistConfig = {
   whitelist: ["cart"],
 };
 
+const sagaMiddleware = createSagaMiddleware();
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Middleware works like any other middleware, they catch actions before hiting the reducer
 // Logger middleware will help logging the steps of the reducer
 // Using process.env.NODE_ENV we can avoid logging when we deploy
 // And .filter(Boolean) will return an empty array if it is true
-const middleWares = [process.env.NODE_ENV !== "production" && logger, thunk].filter(Boolean);
+const middleWares = [process.env.NODE_ENV !== "production" && logger, sagaMiddleware].filter(
+  Boolean
+);
 
 const composeEnhancer =
   (process.env.NODE_ENV !== "production" &&
@@ -35,5 +39,7 @@ const composeEnhancer =
 const composedEnhancers = composeEnhancer(applyMiddleware(...middleWares));
 
 export const store = createStore(persistedReducer, undefined, composedEnhancers);
+
+sagaMiddleware.run(rootSaga);
 
 export const persistor = persistStore(store);

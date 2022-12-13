@@ -1,8 +1,9 @@
 import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import { signOutUser } from "../../utils/firebase/firebase.utils";
+// import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { signOutStart } from "../../store/user/user.action";
 
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
@@ -16,9 +17,12 @@ import { NavigationContainer, NavLinks, NavLink, LogoContainer } from "./navigat
 // import "./navigation.styles.jsx";
 
 const Navigation = () => {
+  const dispatch = useDispatch();
   // useSelector is a method that extracts the values that you want from the entire redux store.
   const currentUser = useSelector(selectCurrentUser);
   const isCartOpen = useSelector(selectIsCartOpen);
+
+  const signOutUser = () => dispatch(signOutStart());
 
   return (
     <Fragment>

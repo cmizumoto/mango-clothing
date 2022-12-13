@@ -16,7 +16,7 @@ export function* fetchCategoriesAsync() {
   try {
     // Generator cannot receive async await, since generators pause functions
     // call is an effect function, you pass the function you want to run, followed by the parameter
-    const categoriesArray = yield call(getCategoriesAndDocuments, "categories");
+    const categoriesArray = yield call(getCategoriesAndDocuments);
     // since we cannot dispatch, we will use yield put
     yield put(fetchCategoriesSuccess(categoriesArray));
   } catch (error) {
