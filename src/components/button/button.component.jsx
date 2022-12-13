@@ -4,7 +4,7 @@
     - invert
     - google sign
 */
-import { BaseButton, GoogleSignInButton, InvertedButton, ButtonSpinner } from "./button.styles.jsx";
+import { BaseButton, GoogleSignInButton, InvertedButton } from "./button.styles.jsx";
 
 // After we refactored the SASS style into styped components
 import "./button.styles.jsx";
@@ -33,13 +33,9 @@ const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) => {
 /* 
   Finally we use the getButton function to define which button was selected and forward the props and children like any other component
 */
-const Button = ({ children, buttonType, isLoading, ...otherProps }) => {
+const Button = ({ children, buttonType, ...otherProps }) => {
   const CustomButton = getButton(buttonType);
-  return (
-    <CustomButton disabled={isLoading} {...otherProps}>
-      {isLoading ? <ButtonSpinner /> : children}
-    </CustomButton>
-  );
+  return <CustomButton {...otherProps}>{children}</CustomButton>;
 };
 
 export default Button;
