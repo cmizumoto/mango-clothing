@@ -1,17 +1,16 @@
 // We are not using redux toolkit, createStore will display as a deprecated feature
 // Once I learn more about redux, I will refactor to use RTK
 import { compose, createStore, applyMiddleware } from "redux";
+// Here we use redux-persist to store the user session (cart items) in the local storage
+// https://www.npmjs.com/package/redux-persist
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import logger from "redux-logger";
 import createSagaMiddleware from "redux-saga";
 
 import { rootSaga } from "./root-saga";
 
 import { rootReducer } from "./root-reducer";
-
-// Here we use redux-persist to store the user session (cart items) in the local storage
-// https://www.npmjs.com/package/redux-persist
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
   key: "root",

@@ -1,4 +1,4 @@
-import { CATEGORIES_ACTION_TYPES } from "../categories/category.types";
+import { CATEGORIES_ACTION_TYPES } from "./category.types";
 
 import { createAction } from "../../utils/reducer/reducer.utils";
 
@@ -9,12 +9,9 @@ import { createAction } from "../../utils/reducer/reducer.utils";
   It can also handle multiple dispatch actions in a row or overtime
 */
 
-export const fetchCategoriesStart = () => {
-  return createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START);
-};
-export const fetchCategoriesSuccess = (categoriesArray) => {
-  return createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS, categoriesArray);
-};
-export const fetchCategoriesFailed = (error) => {
-  return createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error);
-};
+export const fetchCategoriesStart = () =>
+  createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START);
+export const fetchCategoriesSuccess = (categoriesArray) =>
+  createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS, categoriesArray);
+export const fetchCategoriesFailed = (error) =>
+  createAction(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error);
