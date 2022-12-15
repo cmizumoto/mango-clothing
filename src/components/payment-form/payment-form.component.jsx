@@ -8,9 +8,9 @@ import { selectCurrentUser } from "../../store/user/user.selector";
 // Other elements we can bring from stripe
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
-import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
+import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
-import { PaymentFormContainer, FormContainer } from "./payment-form.styles";
+import { PaymentFormContainer, FormContainer, PaymentButton } from "./payment-form.styles";
 
 const PaymentForm = () => {
   /* 
@@ -21,6 +21,7 @@ const PaymentForm = () => {
   const elements = useElements();
   const amount = useSelector(selectCartTotal);
   const currentUser = useSelector(selectCurrentUser);
+
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const paymentHandler = async (event) => {
@@ -53,6 +54,8 @@ const PaymentForm = () => {
     const paymentResult = await stripe.confirmCardPayment(client_secret, {
       payment_method: {
         card: elements.getElement(CardElement),
+        // Check stripe docs for more fields and configs
+        // https://stripe.com/docs/js/payment_intents/confirm_card_payment
         billing_details: {
           name: currentUser ? currentUser.displayName : "Guest",
         },
@@ -75,9 +78,9 @@ const PaymentForm = () => {
       <FormContainer onSubmit={paymentHandler}>
         <h2>Creadit Card Payment</h2>
         <CardElement></CardElement>
-        <Button buttonType={BUTTON_TYPE_CLASSES.inverted} disabled={isProcessingPayment}>
+        <PaymentButton buttonType={BUTTON_TYPE_CLASSES.inverted} isLoading={isProcessingPayment}>
           Buy now
-        </Button>
+        </PaymentButton>
       </FormContainer>
     </PaymentFormContainer>
   );
