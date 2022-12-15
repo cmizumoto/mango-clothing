@@ -6,3 +6,9 @@ export const DirectoryContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
 `;
+
+export const Title = styled.h2`
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 4rem;
+`;
