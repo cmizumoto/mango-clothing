@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const AboutUsContainer = styled.div`
-  margin: 1.2rem 2.2rem;
+  padding: 12px 24px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -18,7 +18,7 @@ export const HalfImage = styled.img`
 `;
 
 export const Description = styled.div`
-  margin: 1.2rem 2.2rem;
+  padding: 12px 24px;
   width: 50%;
   font-size: 1.5rem;
   line-height: 2rem;

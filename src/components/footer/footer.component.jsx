@@ -23,7 +23,7 @@ const Footer = () => {
       </FooterContent>
       <FooterContent>
         <ul>
-          <li> Mango Clothing</li>
+          <li>Mango Clothing</li>
           <li>Mango St 443</li>
           <li>Mongo, MG</li>
           <li>424242-422</li>

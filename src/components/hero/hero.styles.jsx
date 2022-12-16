@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HeroContainer = styled.div`
   height: 70vh;
-  margin-bottom: 2rem;
+  margin-bottom: 24px;
   border: 1px solid black;
 `;
 
