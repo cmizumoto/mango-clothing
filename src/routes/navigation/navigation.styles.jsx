@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const NavigationContainer = styled.nav`
+  padding: 1.2rem 2.2rem;
+  margin: 1rem;
   height: 100px;
   width: 100%;
   display: flex;
@@ -11,8 +13,6 @@ export const NavigationContainer = styled.nav`
 export const LogoContainer = styled(Link)`
   height: 100%;
   width: 70px;
-  margin-top: 18px;
-  margin-left: 25px;
 `;
 
 export const NavLinks = styled.div`

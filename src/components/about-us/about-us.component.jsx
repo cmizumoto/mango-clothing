@@ -12,7 +12,7 @@ const AboutUs = () => {
           alt="forest man with water bottle"
         />
         <Description>
-          <h3>What the Mango?</h3>
+          <h3 className="desc-title">What the Mango?</h3>
           <p>
             Here in Mango we value nature first in our resources, planting new trees for every piece
             of clothing we sell. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt eaque
