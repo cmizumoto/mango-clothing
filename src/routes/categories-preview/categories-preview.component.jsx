@@ -8,6 +8,7 @@ import {
 
 import CategoryPreview from "../../components/category-preview/category-preview.component";
 import Spinner from "../../components/spinner/spinner.component";
+import Footer from "../../components/footer/footer.component";
 
 const CategoriesPreview = () => {
   const categoriesMap = useSelector(selectCategoriesMap);
@@ -24,6 +25,7 @@ const CategoriesPreview = () => {
           return <CategoryPreview key={title} title={title} products={products} />;
         })
       )}
+      <Footer></Footer>
     </Fragment>
   );
 };

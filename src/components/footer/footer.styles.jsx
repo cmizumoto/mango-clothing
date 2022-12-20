@@ -7,7 +7,8 @@ export const FooterContainer = styled.div`
   color: white;
   background-color: black;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 50px;
 `;
 
 export const FooterContent = styled.div`

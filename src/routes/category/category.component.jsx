@@ -9,6 +9,7 @@ import {
 import ProductCard from "../../components/product-card/product-card.component";
 import Spinner from "../../components/spinner/spinner.component";
 import { CategoryTitle, CategoryContainer } from "./category.styles";
+import Footer from "../../components/footer/footer.component";
 
 const Category = () => {
   const { category } = useParams();
@@ -36,6 +37,7 @@ const Category = () => {
             })}
         </CategoryContainer>
       )}
+      <Footer></Footer>
     </Fragment>
   );
 };
