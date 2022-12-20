@@ -1,4 +1,4 @@
-import { AboutUsContainer, HalfImage, Description } from "./about-us.styles";
+import { AboutUsContainer, Description } from "./about-us.styles";
 import { Title } from "../directory/directory.styles";
 import { Fragment } from "react";
 
@@ -7,10 +7,6 @@ const AboutUs = () => {
     <Fragment>
       <Title>ABOUT US</Title>
       <AboutUsContainer>
-        <HalfImage
-          src="https://images.unsplash.com/photo-1630695669474-2abc5258a8d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
-          alt="forest man with water bottle"
-        />
         <Description>
           <h3 className="desc-title">What the Mango?</h3>
           <p>

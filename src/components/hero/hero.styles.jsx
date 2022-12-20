@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const HeroContainer = styled.div`
   height: 70vh;
   margin-bottom: 24px;
-  border: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 `;
 
 export const HeroBackgroundImage = styled.div`

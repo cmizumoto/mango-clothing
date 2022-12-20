@@ -1,27 +1,24 @@
 import styled from "styled-components";
+import { HeroBackgroundImage } from "../hero/hero.styles";
 
-export const AboutUsContainer = styled.div`
-  padding: 12px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  border: 1px solid black;
-`;
+export const AboutUsContainer = styled(HeroBackgroundImage)`
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("https://images.unsplash.com/photo-1630695669474-2abc5258a8d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80");
 
-export const HalfImage = styled.img`
-  height: 100%;
-  width: 50%;
+  min-height: 400px;
 
-  @media (max-width: 768px) {
-    display: none;
-  }
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 export const Description = styled.div`
-  padding: 12px 24px;
-  width: 50%;
+  margin: auto 0;
+  padding: 12px 100px;
   font-size: 1.5rem;
   line-height: 2rem;
+  color: white;
 
   .desc-title {
     font-size: 3rem;
@@ -31,6 +28,7 @@ export const Description = styled.div`
     width: 100%;
     margin: 1rem;
     line-height: 1.7rem;
+    padding: 12px 24px;
 
     .desc-title {
       line-height: 2rem;
