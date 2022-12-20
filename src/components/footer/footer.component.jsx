@@ -1,33 +1,51 @@
-import { FooterContainer, FooterContent } from "./footer.styles";
+import { FooterContainer, FooterContent, FooterLink } from "./footer.styles";
 
 const Footer = () => {
   return (
     <FooterContainer>
       <FooterContent>
+        <h6>
+          <FooterLink to="/">Mango Clothing</FooterLink>
+        </h6>
         <ul>
-          Navigation
-          <li>Logo/home</li>
-          <li>Shop</li>
-          <li>Checkout</li>
-        </ul>
-      </FooterContent>
-      <FooterContent>
-        <ul>
-          Categories
-          <li>Hats</li>
-          <li>Jackets</li>
-          <li>Sneakers</li>
-          <li>Womens</li>
-          <li>Mens</li>
-        </ul>
-      </FooterContent>
-      <FooterContent>
-        <ul>
-          <li>Mango Clothing</li>
           <li>Mango St 443</li>
           <li>Mongo, MG</li>
           <li>424242-422</li>
           <li>Mango Co.</li>
+        </ul>
+      </FooterContent>
+      <FooterContent>
+        <h6>Navigation</h6>
+        <ul>
+          <li>
+            <FooterLink to="/">Home</FooterLink>
+          </li>
+          <li>
+            <FooterLink to="/shop">Shop</FooterLink>
+          </li>
+          <li>
+            <FooterLink to="/checkout">Checkout</FooterLink>
+          </li>
+        </ul>
+      </FooterContent>
+      <FooterContent>
+        <h6>Categories</h6>
+        <ul>
+          <li>
+            <FooterLink to="/shop/hats">Hats</FooterLink>
+          </li>
+          <li>
+            <FooterLink to="/shop/jackets">Jackets</FooterLink>
+          </li>
+          <li>
+            <FooterLink to="/shop/sneakers">Sneakers</FooterLink>
+          </li>
+          <li>
+            <FooterLink to="/shop/womens">Womens</FooterLink>
+          </li>
+          <li>
+            <FooterLink to="/shop/mens">Mens</FooterLink>
+          </li>
         </ul>
       </FooterContent>
     </FooterContainer>
