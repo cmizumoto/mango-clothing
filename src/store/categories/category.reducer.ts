@@ -1,12 +1,21 @@
 import { CATEGORIES_ACTION_TYPES } from "./category.types";
 
+import { CategoryAction } from "./category.action";
+
 export const CATEGORY_INITIAL_STATE = {
   categories: [],
   isLoading: false,
   error: null,
 };
 
-export const categoriesReducer = (state = CATEGORY_INITIAL_STATE, action = {}) => {
+/* 
+  By putting the "as CategoryAction" it becomes a Discriminating Union (https://basarat.gitbook.io/typescript/type-system/discriminated-unions)
+  And will only accept the only 3 actions we set in category.action (FetchCategoriesStart, FetchCategoriesSuccess, FetchCategoriesFailed)
+*/
+export const categoriesReducer = (
+  state = CATEGORY_INITIAL_STATE,
+  action = {} as CategoryAction
+) => {
   const { type, payload } = action;
 
   switch (type) {
