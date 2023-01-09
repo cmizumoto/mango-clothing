@@ -23,6 +23,7 @@ import { AnyAction } from "redux";
   Get the type by accessing the 'type' inside the actions
   the match are defined bellow this type Matchable
 */
+// AC is for the Action Creator, and it is going to be a function that returns AnyAction
 type Matchable<AC extends () => AnyAction> = AC & {
   type: ReturnType<AC>["type"];
   match(action: AnyAction): action is ReturnType<AC>;
