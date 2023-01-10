@@ -29,7 +29,7 @@ export const CATEGORY_INITIAL_STATE: CategoriesState = {
 */
 export const categoriesReducer = (
   state = CATEGORY_INITIAL_STATE,
-  action = {} as AnyAction
+  action: AnyAction
 ): CategoriesState => {
   // Since our Action was not receiving a payload type, we can remove and specify the action inside our switch
   // With action.type and action.payload

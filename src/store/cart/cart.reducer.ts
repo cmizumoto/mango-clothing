@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { CART_ACTION_TYPES, CartItem } from "./cart.types";
+import { CartItem } from "./cart.types";
 import { setCartItems, setIsCartOpen } from "./cart.action";
 
 export type CartState = {

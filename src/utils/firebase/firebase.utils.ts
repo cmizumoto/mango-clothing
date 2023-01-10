@@ -10,6 +10,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  User,
 } from "firebase/auth";
 
 // Firestore
@@ -22,7 +23,10 @@ import {
   writeBatch,
   query,
   getDocs,
+  QueryDocumentSnapshot,
 } from "firebase/firestore";
+
+import { Category } from "../../store/categories/category.types";
 
 // Your web app's Firebase configuration - this is provided by firebase
 const firebaseConfig = {
@@ -54,9 +58,17 @@ export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googlePro
 // getFirestore() retreives the contents from de firestore database
 export const db = getFirestore();
 
+// We know that the guarantee property of this objectToAdd is a string
+export type ObjectToAdd = {
+  title: string;
+};
 // Using this function to grab the Shop Data JS and populate the firestore database
 // Note that we are using these methods because we didn't had a previous database, we are just populating one to continue the examples, but this could be used to store more data.
-export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
+  collectionKey: string,
+  objectsToAdd: T[]
+  // Since we are using Async functions, it will always return a promise, in this case since we are sending to a batch, we don't return, so it is specified with <void>
+): Promise<void> => {
   // The collection key is the collection name, using almost the same structure as the Auth methods.
   const collectionRef = collection(db, collectionKey);
   // writeBatch uses a transaction like exchange, both of the writes must be valid in order to be completed
@@ -76,7 +88,7 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
 };
 
 // Now we can get back the data stored
-export const getCategoriesAndDocuments = async () => {
+export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
   // same as above, we are selecting the collection we want to fetch
   const collectionRef = collection(db, "categories");
   // get a query that returns the collectionRef above
@@ -85,12 +97,25 @@ export const getCategoriesAndDocuments = async () => {
   // finally we try to get the snapshot (data in a structure) from firebase
   const querySnapshot = await getDocs(q);
   // Here we are mapping and creating the categories arrays with the titles and item objects to be received in our website
-  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data() as Category);
+};
+
+export type AdditionalInformation = {
+  displayName?: string;
+};
+
+export type UserData = {
+  createdAt: Date;
+  displayName: string;
+  email: string;
 };
 
 // Using this function to retreive data from authentication service
 // And passing to the firestore
-export const createUserDocumentFromAuth = async (userAuth, additionalInformation) => {
+export const createUserDocumentFromAuth = async (
+  userAuth: User,
+  additionalInformation = {} as AdditionalInformation
+): Promise<void | QueryDocumentSnapshot<UserData>> => {
   if (!userAuth) return;
   // Doc method asks for 3 parameters, database, collection, identifier/unique id
   // Here we are asking for the document in this database under the users collection with this unique ID
@@ -113,7 +138,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
     }
   }
 
-  return userSnapshot;
+  return userSnapshot as QueryDocumentSnapshot<UserData>;
 };
 
 /* 
