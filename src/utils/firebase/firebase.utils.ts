@@ -10,6 +10,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  NextOrObserver,
   User,
 } from "firebase/auth";
 
@@ -134,7 +135,7 @@ export const createUserDocumentFromAuth = async (
       // here we try to set this document in our database
       await setDoc(userDocRef, { displayName, email, createdAt, ...additionalInformation });
     } catch (error) {
-      console.log("error creating the user", error.message);
+      console.log("error creating the user", error);
     }
   }
 
@@ -144,13 +145,13 @@ export const createUserDocumentFromAuth = async (
 /* 
   Create user with Email and Password
 */
-export const createAuthUserWithEmailAndPassword = async (email, password) => {
+export const createAuthUserWithEmailAndPassword = async (email: string, password: string) => {
   if (!email || !password) return;
 
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 
-export const signInAuthUSerWithEmailAndPassword = async (email, password) => {
+export const signInAuthUSerWithEmailAndPassword = async (email: string, password: string) => {
   if (!email || !password) return;
 
   return await signInWithEmailAndPassword(auth, email, password);
@@ -158,9 +159,10 @@ export const signInAuthUSerWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => await signOut(auth);
 
-export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+export const onAuthStateChangedListener = (callback: NextOrObserver<User>) =>
+  onAuthStateChanged(auth, callback);
 
-export const getCurrentUser = () => {
+export const getCurrentUser = (): Promise<User | null> => {
   return new Promise((resolve, reject) => {
     const unsubscribe = onAuthStateChanged(
       auth,
