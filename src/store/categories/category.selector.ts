@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import { RootState } from "../store";
 
 import { CategoriesState } from "./category.reducer";
 import { CategoryMap } from "./category.types";
@@ -9,7 +10,7 @@ import { CategoryMap } from "./category.types";
   Once it reaches the selectCategories, this selector will already return the selectCategoryReducer
   It won't even run the second argument of the function.
 */
-const selectCategoryReducer = (state): CategoriesState => state.categories;
+const selectCategoryReducer = (state: RootState): CategoriesState => state.categories;
 
 /* 
   Here we are using the reselect library to create a memoized function to avoid calculating the same state when other selectors are fired.
