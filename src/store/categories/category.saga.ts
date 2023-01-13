@@ -1,4 +1,4 @@
-import { takeLatest, all, call, put } from "redux-saga/effects";
+import { takeLatest, all, call, put } from "typed-redux-saga";
 
 import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
 
@@ -16,11 +16,11 @@ export function* fetchCategoriesAsync() {
   try {
     // Generator cannot receive async await, since generators pause functions
     // call is an effect function, you pass the function you want to run, followed by the parameter
-    const categoriesArray = yield call(getCategoriesAndDocuments);
+    const categoriesArray = yield* call(getCategoriesAndDocuments);
     // since we cannot dispatch, we will use yield put
-    yield put(fetchCategoriesSuccess(categoriesArray));
+    yield* put(fetchCategoriesSuccess(categoriesArray));
   } catch (error) {
-    yield put(fetchCategoriesFailed(error));
+    yield* put(fetchCategoriesFailed(error as Error));
   }
 }
 
