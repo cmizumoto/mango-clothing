@@ -11,6 +11,9 @@ import createSagaMiddleware from "redux-saga";
 import { rootReducer } from "./root-reducer";
 import { rootSaga } from "./root-saga";
 
+/* 
+  We will be using typeof because it will return what the value really is, if we only declare without typeof, typescript won't understand what is being returned and it will be interpreted as a type
+*/
 export type RootState = ReturnType<typeof rootReducer>;
 
 declare global {
