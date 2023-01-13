@@ -17,7 +17,11 @@ Here is where the next(action) is executed, triggering all the useSelectors cons
 
     - Middleware Next State is logged
 */
-export const loggerMiddleware = (store) => (next) => (action) => {
+
+import { Middleware } from "redux";
+import { RootState } from "../store";
+
+export const loggerMiddleware: Middleware<{}, RootState> = (store) => (next) => (action) => {
   if (!action.type) {
     return next(action);
   }
