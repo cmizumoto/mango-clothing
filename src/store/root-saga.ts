@@ -1,4 +1,4 @@
-import { all, call } from "redux-saga/effects";
+import { all, call } from "typed-redux-saga/macro";
 
 import { categoriesSaga } from "./categories/category.saga";
 import { userSagas } from "./user/user.saga";
@@ -8,5 +8,5 @@ import { userSagas } from "./user/user.saga";
     We import in the root-saga, doing the same thing, yield all(call) since is an async function
 */
 export function* rootSaga() {
-  yield all([call(categoriesSaga), call(userSagas)]);
+  yield* all([call(categoriesSaga), call(userSagas)]);
 }

@@ -13,7 +13,6 @@ import {
   signOutSuccess,
   EmailSignInStart,
   SignUpStart,
-  SignOutFailed,
   SignUpSuccess,
 } from "./user.action";
 
@@ -67,7 +66,7 @@ export function* signOut() {
     yield* call(signOutUser);
     yield* put(signOutSuccess());
   } catch (error) {
-    yield* put(signOutFailed, error);
+    yield* put(signOutFailed(error as Error));
   }
 }
 
